@@ -71,4 +71,5 @@ PerformanceLibrary.dispose();
  - [Single-precision array math](https://github.com/martinkallman/performance-as3/wiki/Single-precision-array-math)
 
 ## Developer's notes
+ - This library requires a SSE2-capable machine
  - Currently all transcendental functions are scalar. Will investigate moving to SSE2 variants
