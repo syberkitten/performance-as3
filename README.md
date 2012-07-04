@@ -8,7 +8,7 @@ Please note that this project is in pre-alpha, and should not be used in product
 
 This library is intended to be used in tandem with the (reintroduced) domainMemory opcodes in the upcoming runtime release.
 
-Depending on platform, function and number of elements, a speed-up of 2-10x can be achieved as compared to native Flash Player math with `Vector.<Number>`.
+Depending on platform, function and number of elements, a speed-up of 2-10x can be achieved as compared to native AVM2 math with `Vector.<Number>`.
 
 
 ## Features and roadmap
