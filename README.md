@@ -18,16 +18,51 @@ Depending on platform, function and number of elements, a speed-up of 2-10x can 
    - Mac OS X (AIR native extension)
    - iOS (AIR native extension)
    - Android (AIR native extension)
-   - Flash Player (Adobe Alchemy)
+   - Flash Player (Adobe Alchemy, Pixel Bender)
 - Single-precision array math
    - Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Single-precision-array-math))
-- Integer array math
+- Support functions
    - In development (Win32)
+- Integer array math
+   - Planned
 - Vector and matrix math
    - Planned
 - Double-precision array math
    - Depending on community response
 - Compression algorithms
    - Depending on community response
-- Data structures
+- Data structures and STL containers
    - Depending on feasibility
+
+
+## Usage
+1. Create a new ActionScript project using the AIR 3.1 SDK
+2. Project properties > ActionScript Build Path > Native Extensions
+3. Add the .ane file from the /bin folder. Close the dialog
+4. Project > Export release build
+5. Choose Signed native installer
+6. Create build
+
+```actionscript
+var dst  : Float32Array = new Float32Array(4),
+    src1 : Float32Array = new Float32Array(4),
+    src2 : Float32Array = new Float32Array(4);
+
+//This will be taken care of with the planned support functions and domainMemory
+src1.data.position = src1.offset;
+src2.data.position = src2.offset;
+
+for( var i : uint = 0; i < 4; i++ ) {
+    src1.data.writeFloat(123.4);
+    src2.data.writeFloat(234.5);
+}
+    
+//Vectorized add
+vfadd(dst, src1, src2);
+
+dst.data.position = dst.offset;
+trace(dst.data.readFloat());
+
+//You MUST call this or the OS will be sad
+PerformanceLibrary.dispose();
+```
