@@ -66,6 +66,7 @@ PerformanceLibrary.dispose();
 ## Documentation
  - [Single-precision array math](https://github.com/martinkallman/performance-as3/wiki/Single-precision-array-math)
  - [Integer array arithmetic](https://github.com/martinkallman/performance-as3/wiki/Integer-array-arithmetic)
+ - [Integer array bitwise functions](https://github.com/martinkallman/performance-as3/wiki/Integer-array-bitwise-functions)
  - [Support functions](https://github.com/martinkallman/performance-as3/wiki/Support-functions)
  
 ## Developer's notes
