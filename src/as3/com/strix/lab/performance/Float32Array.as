@@ -2,9 +2,11 @@ package com.strix.lab.performance {
     
     import flash.utils.ByteArray;
     import flash.utils.Endian;
+    import flash.utils.Proxy;
+    import flash.utils.flash_proxy;
     
     
-    public class Float32Array {
+    public class Float32Array extends Proxy {
         
         private var
             _length : uint,
@@ -32,10 +34,6 @@ package com.strix.lab.performance {
                 throw new Error("'length' cannot be 0");
             }
             
-            _length = value;
-            data.length = value * 4;
-            
-            
             var alignment : uint = getMemoryAddress(data) % 16;
             
             if( alignment == 0 ) {
@@ -50,6 +48,16 @@ package com.strix.lab.performance {
         
         public function get offset() : uint {
             return _offset;
+        }
+        
+        flash_proxy override function getProperty( index:* ) : * {
+            data.position = offset + uint(index)*4;
+            return data.readFloat();
+        }
+        
+        flash_proxy override function setProperty( index:*, value:* ) : void {
+            data.position = offset + uint(index)*4;
+            data.writeFloat(Number(value));
         }
         
     }
