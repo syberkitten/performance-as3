@@ -1,5 +1,5 @@
-performance-as3
-===============
+ActionScript 3 Performance Primitives
+=====================================
 
 ## Introduction
 This is an experimental library for ActionScript 3 geared towards high-performance math, and is losely modeled on the Intel Performance Primitives library.
