@@ -48,20 +48,17 @@ var dst  : Float32Array = new Float32Array(4),
     src1 : Float32Array = new Float32Array(4),
     src2 : Float32Array = new Float32Array(4);
 
-//This will be taken care of with the planned support functions and domainMemory
-src1.data.position = src1.offset;
-src2.data.position = src2.offset;
+//This will be changed with the planned support functions and domainMemory
 
 for( var i : uint = 0; i < 4; i++ ) {
-    src1.data.writeFloat(123.4);
-    src2.data.writeFloat(234.5);
+    src1[i] = 123.4;
+    src2[i] = 234.5;
 }
     
 //Vectorized add
 vfadd(dst, src1, src2);
 
-dst.data.position = dst.offset;
-trace(dst.data.readFloat());
+trace(dst[0]);
 
 //You MUST call this or the OS will be sad
 PerformanceLibrary.dispose();
