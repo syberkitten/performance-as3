@@ -22,7 +22,7 @@ Depending on platform, function and number of elements, a speed-up of 2-10x can 
 - Single-precision array math
    - Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Single-precision-array-math))
 - Support functions
-   - In development (Win32)
+   - In development ([Win32](https://github.com/martinkallman/performance-as3/wiki/Support-functions))
 - Integer array math
    - Planned
 - Vector and matrix math
@@ -65,7 +65,8 @@ PerformanceLibrary.dispose();
 
 ## Documentation
  - [Single-precision array math](https://github.com/martinkallman/performance-as3/wiki/Single-precision-array-math)
-
+ - [Support functions](https://github.com/martinkallman/performance-as3/wiki/Support-functions)
+ 
 ## Developer's notes
  - This library requires a SSE2-capable machine
  - Currently all transcendental functions are scalar. Will investigate moving to SSE2 variants
