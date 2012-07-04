@@ -66,3 +66,9 @@ trace(dst.data.readFloat());
 //You MUST call this or the OS will be sad
 PerformanceLibrary.dispose();
 ```
+
+## Documentation
+ - [Single-precision array math](https://github.com/martinkallman/performance-as3/wiki/Single-precision-array-math)
+
+## Developer's notes
+ - Currently all transcendental functions are scalar. Will investigate moving to SSE2 variants
