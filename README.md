@@ -49,7 +49,6 @@ var dst  : Float32Array = new Float32Array(4),
     src2 : Float32Array = new Float32Array(4);
 
 //This will be changed with the planned support functions and domainMemory
-
 for( var i : uint = 0; i < 4; i++ ) {
     src1[i] = 123.4;
     src2[i] = 234.5;
