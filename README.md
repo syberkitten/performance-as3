@@ -19,20 +19,14 @@ Depending on platform, function and number of elements, a speed-up of 2-10x can 
    - iOS (AIR native extension)
    - Android (AIR native extension)
    - Flash Player (Adobe Alchemy, Pixel Bender)
-- Single-precision array math
-   - Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Single-precision-array-math))
-- Support functions
-   - In development ([Win32](https://github.com/martinkallman/performance-as3/wiki/Support-functions))
-- Integer array math
-   - Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Integer-array-arithmetic)]
-- Vector and matrix math
-   - Planned
-- Double-precision array math
-   - Depending on community response
-- Compression algorithms
-   - Depending on community response
-- Data structures and STL containers
-   - Depending on feasibility
+- Single-precision array math: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Single-precision-array-math))
+- Integer array arithmetic: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Integer-array-arithmetic))
+- Integer array bitwise functions: In development [Win32](https://github.com/martinkallman/performance-as3/wiki/Integer-array-bitwise-functions))
+- Support functions: In development ([Win32](https://github.com/martinkallman/performance-as3/wiki/Support-functions))
+- Vector and matrix math: Planned
+- Double-precision array math: Depending on community response
+- Compression algorithms: Depending on community response
+- Data structures and STL containers: Depending on feasibility
 
 
 ## Usage
