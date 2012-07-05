@@ -11,20 +11,41 @@
 #include "FlashRuntimeExtensions.h"
 #include "performanceas3.h"
 
-#define F32_SETDST( expression ) \
+//DST = X
+#define SETDST( expression ) \
     uint32_t i; \
     for( i = 0; i < dst_length; i++ ) { \
         dst[i] = (expression); \
     }
 
-#define F32_SETDST1DST2( expression1, expression2 ) \
+//DST1, DST2 = X, Y
+#define SETDST1DST2( expression1, expression2 ) \
     uint32_t i; \
     for( i = 0; i < src_length; i++ ) { \
         dst1[i] = (expression1); \
         dst2[i] = (expression2); \
     }
 
-#define F32_DSTSRC1SRC2_HEAD \
+//DST = OP(SRC)
+#define DSTSRC_HEAD( type ) \
+    FREByteArray dst_array; \
+    FREByteArray src_array; \
+    uint32_t dst_offset; \
+    uint32_t src_offset; \
+    uint32_t dst_length; \
+    uint32_t src_length; \
+    FREAcquireByteArray(argv[0], &dst_array); \
+    FREAcquireByteArray(argv[1], &src_array); \
+    FREGetObjectAsUint32(argv[2], &dst_offset); \
+    FREGetObjectAsUint32(argv[3], &src_offset); \
+    FREGetObjectAsUint32(argv[4], &dst_length); \
+    FREGetObjectAsUint32(argv[5], &src_length); \
+    type* dst = (type*)(dst_array.bytes+dst_offset); \
+    type* src = (type*)(src_array.bytes+src_offset);
+
+
+//DST = OP(SRC1, SRC2)
+#define DSTSRC1SRC2_HEAD( type ) \
     FREByteArray dst_array; \
     FREByteArray src1_array; \
     FREByteArray src2_array; \
@@ -43,24 +64,73 @@
     FREGetObjectAsUint32(argv[6], &dst_length); \
     FREGetObjectAsUint32(argv[7], &src1_length); \
     FREGetObjectAsUint32(argv[8], &src2_length); \
-    float* dst = (float*)(dst_array.bytes+dst_offset); \
-    float* src1 = (float*)(src1_array.bytes+src1_offset); \
-    float* src2 = (float*)(src2_array.bytes+src2_offset);
+    type* dst = (type*)(dst_array.bytes+dst_offset); \
+    type* src1 = (type*)(src1_array.bytes+src1_offset); \
+    type* src2 = (type*)(src2_array.bytes+src2_offset);
 
-#define F32_DSTSRC1SRC2_TAIL \
-    FREReleaseByteArray(argv[2]); \
-    FREReleaseByteArray(argv[1]); \
-    FREReleaseByteArray(argv[0]);
+//DST = OP(SRC, VAL)
+#define DSTSRCVAL_HEAD( uptype, downtype ) \
+    FREByteArray dst_array; \
+    FREByteArray src_array; \
+    uptype val; \
+    downtype fval; \
+    uint32_t dst_offset; \
+    uint32_t src_offset; \
+    uint32_t dst_length; \
+    uint32_t src_length; \
+    FREAcquireByteArray(argv[0], &dst_array); \
+    FREAcquireByteArray(argv[1], &src_array); \
+    FREGetObjectAsDouble(argv[2], &val); \
+    fval = (downtype)val; \
+    FREGetObjectAsUint32(argv[3], &dst_offset); \
+    FREGetObjectAsUint32(argv[4], &src_offset); \
+    FREGetObjectAsUint32(argv[5], &dst_length); \
+    FREGetObjectAsUint32(argv[6], &src_length); \
+    downtype* dst = (downtype*)(dst_array.bytes+dst_offset); \
+    downtype* src = (downtype*)(src_array.bytes+src_offset);
 
-#define F32_DSTSRC1SRC2_FUNC( expression ) \
-    FREObject result; \
-    F32_DSTSRC1SRC2_HEAD; \
-    F32_SETDST((expression)); \
-    F32_DSTSRC1SRC2_TAIL; \
-    FRENewObjectFromBool(1, &result); \
-    return result;
 
-#define F32_DSTSRC1SRC2SRC3_HEAD \
+//DST = OP(SRC, VAL) [32i]
+#define DSTSRCVAL32I_HEAD \
+    FREByteArray dst_array; \
+    FREByteArray src_array; \
+    int32_t fval; \
+    uint32_t dst_offset; \
+    uint32_t src_offset; \
+    uint32_t dst_length; \
+    uint32_t src_length; \
+    FREAcquireByteArray(argv[0], &dst_array); \
+    FREAcquireByteArray(argv[1], &src_array); \
+    FREGetObjectAsInt32(argv[2], &fval); \
+    FREGetObjectAsUint32(argv[3], &dst_offset); \
+    FREGetObjectAsUint32(argv[4], &src_offset); \
+    FREGetObjectAsUint32(argv[5], &dst_length); \
+    FREGetObjectAsUint32(argv[6], &src_length); \
+    int32_t* dst = (int32_t*)(dst_array.bytes+dst_offset); \
+    int32_t* src = (int32_t*)(src_array.bytes+src_offset);
+
+//DST = OP(SRC, VAL) [32u]
+#define DSTSRCVAL32U_HEAD \
+    FREByteArray dst_array; \
+    FREByteArray src_array; \
+    uint32_t fval; \
+    uint32_t dst_offset; \
+    uint32_t src_offset; \
+    uint32_t dst_length; \
+    uint32_t src_length; \
+    FREAcquireByteArray(argv[0], &dst_array); \
+    FREAcquireByteArray(argv[1], &src_array); \
+    FREGetObjectAsUint32(argv[2], &fval); \
+    FREGetObjectAsUint32(argv[3], &dst_offset); \
+    FREGetObjectAsUint32(argv[4], &src_offset); \
+    FREGetObjectAsUint32(argv[5], &dst_length); \
+    FREGetObjectAsUint32(argv[6], &src_length); \
+    uint32_t* dst = (uint32_t*)(dst_array.bytes+dst_offset); \
+    uint32_t* src = (uint32_t*)(src_array.bytes+src_offset);
+
+
+//DST = OP(SRC1, SRC2, SRC)
+#define DSTSRC1SRC2SRC3_HEAD( type ) \
     FREByteArray dst_array; \
     FREByteArray src1_array; \
     FREByteArray src2_array; \
@@ -85,26 +155,13 @@
     FREGetObjectAsUint32(argv[9], &src1_length); \
     FREGetObjectAsUint32(argv[10], &src2_length); \
     FREGetObjectAsUint32(argv[11], &src3_length); \
-    float* dst = (float*)(dst_array.bytes+dst_offset); \
-    float* src1 = (float*)(src1_array.bytes+src1_offset); \
-    float* src2 = (float*)(src2_array.bytes+src2_offset); \
-    float* src3 = (float*)(src3_array.bytes+src3_offset);
+    type* dst = (type*)(dst_array.bytes+dst_offset); \
+    type* src1 = (type*)(src1_array.bytes+src1_offset); \
+    type* src2 = (type*)(src2_array.bytes+src2_offset); \
+    type* src3 = (type*)(src3_array.bytes+src3_offset);
 
-#define F32_DSTSRC1SRC2SRC3_TAIL \
-    FREReleaseByteArray(argv[3]); \
-    FREReleaseByteArray(argv[2]); \
-    FREReleaseByteArray(argv[1]); \
-    FREReleaseByteArray(argv[0]);
-
-#define F32_DSTSRC1SRC2SRC3_FUNC( expression ) \
-    FREObject result; \
-    F32_DSTSRC1SRC2SRC3_HEAD; \
-    F32_SETDST((expression)); \
-    F32_DSTSRC1SRC2SRC3_TAIL; \
-    FRENewObjectFromBool(1, &result); \
-    return result;
-
-#define F32_DST1DST2SRC_HEAD \
+//DST1, DST2 = OP(SRC)
+#define DST1DST2SRC_HEAD( type ) \
     FREByteArray dst1_array; \
     FREByteArray dst2_array; \
     FREByteArray src_array; \
@@ -123,80 +180,94 @@
     FREGetObjectAsUint32(argv[6], &dst1_length); \
     FREGetObjectAsUint32(argv[7], &dst2_length); \
     FREGetObjectAsUint32(argv[8], &src_length); \
-    float* dst1 = (float*)(dst1_array.bytes+dst1_offset); \
-    float* dst2 = (float*)(dst2_array.bytes+dst2_offset); \
-    float* src = (float*)(src_array.bytes+src_offset);
+    type* dst1 = (type*)(dst1_array.bytes+dst1_offset); \
+    type* dst2 = (type*)(dst2_array.bytes+dst2_offset); \
+    type* src = (type*)(src_array.bytes+src_offset);
 
-#define F32_DST1DST2SRC_TAIL \
+#define DSTSRC_TAIL \
+    FREReleaseByteArray(argv[1]); \
+    FREReleaseByteArray(argv[0]);
+
+#define DSTSRC1SRC2_TAIL \
     FREReleaseByteArray(argv[2]); \
     FREReleaseByteArray(argv[1]); \
     FREReleaseByteArray(argv[0]);
 
-#define F32_DST1DST2SRC_FUNC( expression1, expression2 ) \
-    FREObject result; \
-    F32_DST1DST2SRC_HEAD; \
-    F32_SETDST1DST2(expression1, expression2); \
-    F32_DST1DST2SRC_TAIL; \
-    FRENewObjectFromBool(1, &result); \
-    return result;
-
-#define F32_DSTSRCVAL_HEAD \
-    FREByteArray dst_array; \
-    FREByteArray src_array; \
-    double val; \
-    float fval; \
-    uint32_t dst_offset; \
-    uint32_t src_offset; \
-    uint32_t dst_length; \
-    uint32_t src_length; \
-    FREAcquireByteArray(argv[0], &dst_array); \
-    FREAcquireByteArray(argv[1], &src_array); \
-    FREGetObjectAsDouble(argv[2], &val); \
-    fval = (float)val; \
-    FREGetObjectAsUint32(argv[3], &dst_offset); \
-    FREGetObjectAsUint32(argv[4], &src_offset); \
-    FREGetObjectAsUint32(argv[5], &dst_length); \
-    FREGetObjectAsUint32(argv[6], &src_length); \
-    float* dst = (float*)(dst_array.bytes+dst_offset); \
-    float* src = (float*)(src_array.bytes+src_offset);
-
-#define F32_DSTSRCVAL_TAIL \
+#define DSTSRCVAL_TAIL \
     FREReleaseByteArray(argv[1]); \
     FREReleaseByteArray(argv[0]);
 
-#define F32_DSTSRCVAL_FUNC( expression ) \
-    FREObject result; \
-    F32_DSTSRCVAL_HEAD; \
-    F32_SETDST((expression)); \
-    F32_DSTSRCVAL_TAIL; \
-    FRENewObjectFromBool(1, &result); \
-    return result;
-
-#define F32_DSTSRC_HEAD \
-    FREByteArray dst_array; \
-    FREByteArray src_array; \
-    uint32_t dst_offset; \
-    uint32_t src_offset; \
-    uint32_t dst_length; \
-    uint32_t src_length; \
-    FREAcquireByteArray(argv[0], &dst_array); \
-    FREAcquireByteArray(argv[1], &src_array); \
-    FREGetObjectAsUint32(argv[2], &dst_offset); \
-    FREGetObjectAsUint32(argv[3], &src_offset); \
-    FREGetObjectAsUint32(argv[4], &dst_length); \
-    FREGetObjectAsUint32(argv[5], &src_length); \
-    float* dst = (float*)(dst_array.bytes+dst_offset); \
-    float* src = (float*)(src_array.bytes+src_offset);
-
-#define F32_DSTSRC_TAIL \
+#define DST1DST2SRC_TAIL \
+    FREReleaseByteArray(argv[2]); \
     FREReleaseByteArray(argv[1]); \
     FREReleaseByteArray(argv[0]);
 
-#define F32_DSTSRC_FUNC( expression ) \
+#define DSTSRC1SRC2SRC3_TAIL \
+    FREReleaseByteArray(argv[3]); \
+    FREReleaseByteArray(argv[2]); \
+    FREReleaseByteArray(argv[1]); \
+    FREReleaseByteArray(argv[0]);
+
+//DST = OP(SRC)
+#define DstSrcFunc( type, expression ) \
     FREObject result; \
-    F32_DSTSRC_HEAD; \
-    F32_SETDST((expression)); \
-    F32_DSTSRC_TAIL; \
+    DSTSRC_HEAD(type); \
+    SETDST(expression); \
+    DSTSRC_TAIL; \
+    FRENewObjectFromBool(1, &result); \
+    return result;
+
+//DST = OP(SRC1, SRC2)
+#define DstSrc1Src2Func( type, expression ) \
+    FREObject result; \
+    DSTSRC1SRC2_HEAD(type); \
+    SETDST(expression); \
+    DSTSRC1SRC2_TAIL; \
+    FRENewObjectFromBool(1, &result); \
+    return result;
+
+//DST = OP(SRC1, SRC2, SRC3)
+#define DstSrc1Src2Src3Func( type, expression ) \
+    FREObject result; \
+    DSTSRC1SRC2SRC3_HEAD(type); \
+    SETDST(expression); \
+    DSTSRC1SRC2SRC3_TAIL; \
+    FRENewObjectFromBool(1, &result); \
+    return result;
+
+//DST = OP(SRC, VAL)
+#define DstSrcValFunc( uptype, downtype, expression ) \
+    FREObject result; \
+    DSTSRCVAL_HEAD(uptype, downtype); \
+    SETDST(expression); \
+    DSTSRCVAL_TAIL; \
+    FRENewObjectFromBool(1, &result); \
+    return result;
+
+//DST = OP(SRC, VAL) [32i]
+#define DstSrcVal32iFunc( expression ) \
+    FREObject result; \
+    DSTSRCVAL32I_HEAD; \
+    SETDST(expression); \
+    DSTSRCVAL_TAIL; \
+    FRENewObjectFromBool(1, &result); \
+    return result;
+
+//DST = OP(SRC, VAL) [32u]
+#define DstSrcVal32uFunc( expression ) \
+    FREObject result; \
+    DSTSRCVAL32U_HEAD; \
+    SETDST(expression); \
+    DSTSRCVAL_TAIL; \
+    FRENewObjectFromBool(1, &result); \
+    return result;
+
+//DST1, DST2 = OP(SRC)
+#define Dst1Dst2SrcFunc( type, expression1, expression2 ) \
+    FREObject result; \
+    DST1DST2SRC_HEAD(type); \
+    SETDST1DST2(expression1, expression2); \
+    DST1DST2SRC_TAIL; \
     FRENewObjectFromBool(1, &result); \
     return result;
 
@@ -206,132 +277,231 @@
 	to.function = &ffunc;
 
 
+
 const float LOG_10 = 2.30258509299404f;
 
 
+
 FREObject Add_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC1SRC2_FUNC(src1[i] + src2[i]);
+    DstSrc1Src2Func(float, src1[i] + src2[i]);
 }
 
 FREObject AddC_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRCVAL_FUNC(src[i] + fval);
+    DstSrcValFunc(double, float, src[i] + fval);
 }
 
 FREObject Sub_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC1SRC2_FUNC(src1[i] - src2[i]);
+    DstSrc1Src2Func(float, src1[i] - src2[i]);
 }
 
 FREObject SubC_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRCVAL_FUNC(src[i] - fval);
+    DstSrcValFunc(double, float, src[i] - fval);
 }
 
 FREObject SubCRev_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRCVAL_FUNC(fval - src[i]);
+    DstSrcValFunc(double, float, fval - src[i]);
 }
 
 FREObject Mul_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC1SRC2_FUNC(src1[i] * src2[i]);
+    DstSrc1Src2Func(float, src1[i] * src2[i]);
 }
 
 FREObject MulC_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRCVAL_FUNC(src[i] * fval);
+    DstSrcValFunc(double, float, src[i] * fval);
 }
 
 FREObject Div_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC1SRC2_FUNC(src1[i] / src2[i]);
+    DstSrc1Src2Func(float, src1[i] / src2[i]);
 }
 
 FREObject DivC_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRCVAL_FUNC(src[i] / fval);
+    DstSrcValFunc(double, float, src[i] / fval);
 }
 
 FREObject DivCRev_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRCVAL_FUNC(fval / src[i]);
+    DstSrcValFunc(double, float, fval / src[i]);
 }
 
 FREObject Sin_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC_FUNC(xsinf(src[i]));
+    DstSrcFunc(float, xsinf(src[i]));
 }
 
 FREObject Cos_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC_FUNC(xcosf(src[i]));
+    DstSrcFunc(float, xcosf(src[i]));
 }
 
 FREObject Tan_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC_FUNC(xtanf(src[i]));
+    DstSrcFunc(float, xtanf(src[i]));
 }
 
 FREObject Asin_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC_FUNC(xasinf(src[i]));
+    DstSrcFunc(float, xasinf(src[i]));
 }
 
 FREObject Acos_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC_FUNC(xacosf(src[i]));
+    DstSrcFunc(float, xacosf(src[i]));
 }
 
 FREObject Atan_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC_FUNC(xatanf(src[i]));
+    DstSrcFunc(float, xatanf(src[i]));
 }
 
 FREObject SinCos_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DST1DST2SRC_FUNC(xsinf(src[i]), xcosf(src[i]));
+    Dst1Dst2SrcFunc(float, xsinf(src[i]), xcosf(src[i]));
 }
 
 FREObject Atan2_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC1SRC2_FUNC(xatan2f(src1[i], src2[i]));
+    DstSrc1Src2Func(float, xatan2f(src1[i], src2[i]));
 }
 
 FREObject Exp_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC_FUNC(xexpf(src[i]));
+    DstSrcFunc(float, xexpf(src[i]));
 }
 
 FREObject Log_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC_FUNC(xlogf(src[i]));
+    DstSrcFunc(float, xlogf(src[i]));
 }
 
 FREObject Log10_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC_FUNC(xlogf(src[i]) / LOG_10);
+    DstSrcFunc(float, xlogf(src[i]) / LOG_10);
 }
 
 FREObject Pow_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC1SRC2_FUNC((float)xpow(src1[i], src2[i]));
+    DstSrc1Src2Func(float, (float)xpow(src1[i], src2[i]));
 }
 
-
 FREObject PowC_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRCVAL_FUNC((float)xpow(src[i], fval));
+    DstSrcValFunc(double, float, (float)xpow(src[i], fval));
 }
 
 FREObject Sqrt_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC_FUNC((float)xsqrt(src[i]));
+    DstSrcFunc(float, (float)xsqrt(src[i]));
 }
 
 FREObject Cbrt_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC_FUNC(xcbrtf(src[i]));
+    DstSrcFunc(float, xcbrtf(src[i]));
 }
 
 FREObject Ceil_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC_FUNC(ceilf(src[i]));
+	DstSrcFunc(float, ceilf(src[i]));
 }
 
 FREObject Floor_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC_FUNC(floorf(src[i]));
+	DstSrcFunc(float, floorf(src[i]));
 }
 
 FREObject Abs_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC_FUNC(fabsf(src[i]));
+	DstSrcFunc(float, fabsf(src[i]));
 }
 
 FREObject Mod_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC1SRC2_FUNC(fmod(src1[i], src2[i]));
+    DstSrc1Src2Func(float, fmod(src1[i], src2[i]));
 }
 
 FREObject ModC_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRCVAL_FUNC(fmod(src[i], fval));
+    DstSrcValFunc(double, float, fmod(src[i], fval));
 }
 
 FREObject FMA_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
-    F32_DSTSRC1SRC2SRC3_FUNC((float)xfma(src1[i], src2[i], src3[i]));
+    DstSrc1Src2Src3Func(float, (float)xfma(src1[i], src2[i], src3[i]));
+}
+
+
+FREObject Add_32i( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+    DstSrc1Src2Func(int32_t, src1[i] + src2[i]);
+}
+
+FREObject AddC_32i( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+    DstSrcVal32iFunc(src[i] + fval);
+}
+
+FREObject Sub_32i( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	DstSrc1Src2Func(int32_t, src1[i] - src2[i]);
+}
+
+FREObject SubC_32i( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	DstSrcVal32iFunc(src[i] - fval);
+}
+
+FREObject SubCRev_32i( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	DstSrcVal32iFunc(fval - src[i]);
+}
+
+FREObject Mul_32i( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	DstSrc1Src2Func(int32_t, src1[i] * src2[i]);
+}
+
+FREObject MulC_32i( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	DstSrcVal32iFunc(src[i] * fval);
+}
+
+FREObject Div_32i( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	DstSrc1Src2Func(int32_t, src1[i] / src2[i]);
+}
+
+FREObject DivC_32i( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	DstSrcVal32iFunc(src[i] / fval);
+}
+
+FREObject DivCRev_32i( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	DstSrcVal32iFunc(fval / src[i]);
+}
+
+FREObject Mod_32i( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+    DstSrc1Src2Func(int32_t, src1[i] % src2[i]);
+}
+
+FREObject ModC_32i( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	DstSrcVal32iFunc(src[i] % fval);
+}
+
+
+FREObject Add_32u( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	DstSrc1Src2Func(uint32_t, src1[i] + src2[i]);
+}
+
+FREObject AddC_32u( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	DstSrcVal32uFunc(src[i] + fval);
+}
+
+FREObject Sub_32u( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	DstSrc1Src2Func(uint32_t, src1[i] - src2[i]);
+}
+
+FREObject SubC_32u( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	DstSrcVal32uFunc(src[i] - fval);
+}
+
+FREObject SubCRev_32u( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	DstSrcVal32uFunc(fval - src[i]);
+}
+
+FREObject Mul_32u( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	DstSrc1Src2Func(uint32_t, src1[i] * src2[i]);
+}
+
+FREObject MulC_32u( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	DstSrcVal32uFunc(src[i] * fval);
+}
+
+FREObject Div_32u( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	DstSrc1Src2Func(uint32_t, src1[i] / src2[i]);
+}
+
+FREObject DivC_32u( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	DstSrcVal32uFunc(src[i] / fval);
+}
+
+FREObject DivCRev_32u( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	DstSrcVal32uFunc(fval / src[i]);
+}
+
+FREObject Mod_32u( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+    DstSrc1Src2Func(uint32_t, src1[i] % src2[i]);
+}
+
+FREObject ModC_32u( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	DstSrcVal32uFunc(src[i] % fval);
 }
 
 
@@ -352,7 +522,7 @@ FREObject GetMemoryAddress( FREContext ctx, void* funcData, uint32_t argc, FREOb
 
 
 void contextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctions, const FRENamedFunction** functions) {
-    *numFunctions = 33;
+    *numFunctions = 57;
     FRENamedFunction* func = (FRENamedFunction*) malloc(sizeof(FRENamedFunction) * (*numFunctions));
 
     EXPORT_FUNC(func[0],    "GetMemoryAddress",	GetMemoryAddress);
@@ -387,6 +557,33 @@ void contextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
     EXPORT_FUNC(func[30],   "Mod_32f",          Mod_32f);
     EXPORT_FUNC(func[31],   "ModC_32f",         ModC_32f);
     EXPORT_FUNC(func[32],   "FMA_32f",          FMA_32f);
+
+    EXPORT_FUNC(func[33],   "Add_32i",          Add_32i);
+    EXPORT_FUNC(func[34],   "AddC_32i",         AddC_32i);
+    EXPORT_FUNC(func[35],   "Sub_32i",          Sub_32i);
+    EXPORT_FUNC(func[36],   "SubC_32i",         SubC_32i);
+    EXPORT_FUNC(func[37],   "SubCRev_32i",      SubCRev_32i);
+    EXPORT_FUNC(func[38],   "Mul_32i",          Mul_32i);
+	EXPORT_FUNC(func[39],   "MulC_32i",         MulC_32i);
+	EXPORT_FUNC(func[40],   "Div_32i",          Div_32i);
+	EXPORT_FUNC(func[41],   "DivC_32i",         DivC_32i);
+	EXPORT_FUNC(func[42],   "DivCRev_32i",      DivCRev_32i);
+    EXPORT_FUNC(func[43],   "Mod_32i",          Mod_32i);
+    EXPORT_FUNC(func[44],   "ModC_32i",         ModC_32i);
+
+    EXPORT_FUNC(func[45],   "Add_32u",          Add_32u);
+    EXPORT_FUNC(func[46],   "AddC_32u",         AddC_32u);
+    EXPORT_FUNC(func[47],   "Sub_32u",          Sub_32u);
+    EXPORT_FUNC(func[48],   "SubC_32u",         SubC_32u);
+    EXPORT_FUNC(func[49],   "SubCRev_32u",      SubCRev_32u);
+    EXPORT_FUNC(func[50],   "Mul_32u",          Mul_32u);
+	EXPORT_FUNC(func[51],   "MulC_32u",         MulC_32u);
+	EXPORT_FUNC(func[52],   "Div_32u",          Div_32u);
+	EXPORT_FUNC(func[53],   "DivC_32u",         DivC_32u);
+	EXPORT_FUNC(func[54],   "DivCRev_32u",      DivCRev_32u);
+    EXPORT_FUNC(func[55],   "Mod_32u",          Mod_32u);
+    EXPORT_FUNC(func[56],   "ModC_32u",         ModC_32u);
+
 
     *functions = func;
 }

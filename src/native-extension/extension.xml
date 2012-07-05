@@ -3,7 +3,7 @@
         <id>PerformanceLib</id>
         <name>ActionScript 3 Performance Library</name>
         <copyright>Martin Kallman 2012</copyright>
-        <versionNumber>1.0.0</versionNumber>
+        <versionNumber>1.0.1</versionNumber>
         <platforms>
         <platform name="Windows-x86">
                 <applicationDeployment>
