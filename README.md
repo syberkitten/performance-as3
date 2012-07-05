@@ -24,7 +24,7 @@ Depending on platform, function and number of elements, a speed-up of 2-10x can 
 - Support functions
    - In development ([Win32](https://github.com/martinkallman/performance-as3/wiki/Support-functions))
 - Integer array math
-   - Planned
+   - Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Integer-array-arithmetic)]
 - Vector and matrix math
    - Planned
 - Double-precision array math
