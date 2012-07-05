@@ -90,7 +90,7 @@ This being so, this library is targeted mainly at games written for AIR (Windows
 <br>
 
 
-### domainMemory and license issues
+### domainMemory and (no) license issues
 The ANE (native extension) version of the library *does not* depend on the use of domainMemory opcodes - however, this will by far be the fastest way to access results from computations, as AS3PP works with ByteArrays.
 
 Adobe will not require you to purchase a license for the use of domainMemory and/or Stage3D in AIR applications. As for applications running in the Flash Player, this depends on your income. This may or may not apply to the Flash Player version of the library to begin with, depending on which constellation of technologies is chosen for this sub-project.
