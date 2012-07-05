@@ -23,7 +23,7 @@ class MadBird {
    }
 }
 
-//This holds all of birds
+//This holds all our birds
 var birds : Vector.<MadBird> = new Vector.<MadBird>;
 
 ...
