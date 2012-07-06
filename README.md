@@ -120,9 +120,9 @@ Adobe will not require you to purchase a license for the use of domainMemory and
 Please read the instructions for [installing, upgrading & troubleshooting](https://github.com/martinkallman/performance-as3/wiki/Installing,-upgrading-and-managing-faulty-state) to add the extension to your project.
 
 ```actionscript
-var dst  : Float32Array = new Float32Array(4),
-    src1 : Float32Array = new Float32Array(4),
-    src2 : Float32Array = new Float32Array(4);
+var sum : Float32Array = new Float32Array(4),
+    a   : Float32Array = new Float32Array(4),
+    b   : Float32Array = new Float32Array(4);
 
 //This will be changed with the planned support functions and domainMemory
 for( var i : uint = 0; i < 4; i++ ) {
@@ -130,10 +130,10 @@ for( var i : uint = 0; i < 4; i++ ) {
     src2[i] = 234.5;
 }
     
-//Vectorized add
-vfadd(dst, src1, src2);
+//Vectorized add: result = a + b
+vfadd(sum, a, b);
 
-trace(dst[0]);
+trace(sum[0] as Number);
 
 //You MUST call this or the OS will be sad
 PerformanceLibrary.dispose();
