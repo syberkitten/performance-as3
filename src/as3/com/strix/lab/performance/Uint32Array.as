@@ -6,18 +6,18 @@ package com.strix.lab.performance {
     import flash.utils.flash_proxy;
     
     
-    public class Uint32Array extends Proxy {
+    public class Uint32Array extends Proxy implements NumericArray  {
         
         private var
             _length : uint,
             _offset : uint;
         
         public var
-            data   : ByteArray;
+            data : ByteArray;
             
-        public function Uint32Array( length : int ) {
+        public function Uint32Array( length:int ) {
             this.data = new ByteArray;
-            this.data.endian = Endian.LITTLE_ENDIAN
+            this.data.endian = Endian.LITTLE_ENDIAN;
             this.length = length;
         }
         

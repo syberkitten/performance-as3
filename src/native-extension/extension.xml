@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension xmlns="http://ns.adobe.com/air/extension/3.1">
         <id>PerformanceLib</id>
-        <name>ActionScript 3 Performance Library</name>
+        <name>ActionScript 3 Performance Primitives</name>
         <copyright>Martin Kallman 2012</copyright>
-        <versionNumber>1.0.1</versionNumber>
+        <versionNumber>1.0.2</versionNumber>
         <platforms>
         <platform name="Windows-x86">
                 <applicationDeployment>
