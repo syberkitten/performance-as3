@@ -5,7 +5,6 @@ ActionScript 3 Performance Primitives
 
 This is an experimental library for ActionScript 3 geared towards high-performance math, and is losely modeled on the Intel Performance Primitives library. It is intended for use with games in subsystems that are performance-sensitive, such as graphics, physics and networking.
 
-<br>
 
 ### Difference from ActionScript's Math functions
 There is a fundamental difference in how AS3PP operates as compared to AVM2's built-in functions exposed through the Math class. In technical terms, in AS3PP you work with what is called the *Structure of Arrays* approach, as opposed to Array of Structures - which is most likely what you are familiar with. These differences are easier to demonstrate with the help of some pseudo-code.
@@ -147,6 +146,10 @@ PerformanceLibrary.dispose();
 <br><br>
 
 ## Documentation
+General
+ - [Function naming](https://github.com/martinkallman/performance-as3/wiki/Function-naming)
+
+Reference
  - [Single-precision array math](https://github.com/martinkallman/performance-as3/wiki/Single-precision-array-math)
  - [Integer array arithmetic](https://github.com/martinkallman/performance-as3/wiki/Integer-array-arithmetic)
  - [Integer array bitwise functions](https://github.com/martinkallman/performance-as3/wiki/Integer-array-bitwise-functions)
