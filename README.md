@@ -159,3 +159,7 @@ Reference
 ## Developer's notes
  - This library requires a SSE2-capable machine
  - Currently all transcendental functions are scalar. Will investigate moving to SSE2 variants
+
+
+## Credits
+ - A special thanks to Naoki Shibata for his efforts with SLEEF, which we rely upon
