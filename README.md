@@ -142,6 +142,7 @@ PerformanceLibrary.dispose();
 
 ## Documentation
 General
+ - [Installing, upgrading & troubleshooting](https://github.com/martinkallman/performance-as3/wiki/Installing,-upgrading-and-managing-faulty-state)
  - [Function naming](https://github.com/martinkallman/performance-as3/wiki/Function-naming)
 
 Reference
