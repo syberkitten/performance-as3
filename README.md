@@ -116,12 +116,7 @@ Adobe will not require you to purchase a license for the use of domainMemory and
 <br><br>
 
 ## Usage
-1. Create a new ActionScript project using the AIR 3.1 SDK
-2. Project properties > ActionScript Build Path > Native Extensions
-3. Add the .ane file from the /bin folder. Close the dialog
-4. Project > Export release build
-5. Choose Signed native installer
-6. Create build
+Please read the instructions for [installing, upgrading & troubleshooting](https://github.com/martinkallman/performance-as3/wiki/Installing,-upgrading-and-managing-faulty-state) to add the extension to your project.
 
 ```actionscript
 var dst  : Float32Array = new Float32Array(4),
