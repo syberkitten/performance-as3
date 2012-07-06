@@ -130,7 +130,7 @@ for( var i : uint = 0; i < 4; i++ ) {
     src2[i] = 234.5;
 }
     
-//Vectorized add: result = a + b
+//Vectorized add: sum = a + b
 vfadd(sum, a, b);
 
 trace(sum[0] as Number);
