@@ -12,6 +12,9 @@ package flexUnitTests {
     import com.strix.lab.performance.vfdiv;
     import com.strix.lab.performance.vfdivc;
     import com.strix.lab.performance.vfdivcr;
+    import com.strix.lab.performance.vfexp;
+    import com.strix.lab.performance.vflog;
+    import com.strix.lab.performance.vflog10;
     import com.strix.lab.performance.vfmul;
     import com.strix.lab.performance.vfmulc;
     import com.strix.lab.performance.vfset;
@@ -291,6 +294,49 @@ package flexUnitTests {
             vfset(vfb, fb);
             vfatan2(vfr, vfa, vfb)             
             fr = Math.atan2(fa, fb);
+            
+            assertTrue(
+                "Error exceeded absolute tolerance",
+                nearEquals(vfr[0] as Number, fr)
+            );
+        }
+        
+        [Test]
+        public function testExp32f() : void {
+            fa = 1.2345;
+            vfset(vfa, fa);
+            vfexp(vfr, vfa);             
+            fr = Math.exp(fa);
+            
+            assertTrue(
+                "Error exceeded absolute tolerance",
+                nearEquals(vfr[0] as Number, fr)
+            );
+        }
+        
+        [Test]
+        public function testLog32f() : void {
+            fa = frand(true);
+            vfset(vfa, fa);
+            vflog(vfr, vfa);             
+            fr = Math.log(fa);
+            
+            //trace(fa);
+            //trace(Math.log(fa));
+            //trace(vfr[0]);
+            
+            assertTrue(
+                "Error exceeded absolute tolerance",
+                nearEquals(vfr[0] as Number, fr)
+            );
+        }
+        
+        [Test]
+        public function testLog1032f() : void {
+            fa = frand(true);
+            vfset(vfa, fa);
+            vflog10(vfr, vfa);             
+            fr = Math.log(fa)*Math.LOG10E;
             
             assertTrue(
                 "Error exceeded absolute tolerance",
