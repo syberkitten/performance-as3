@@ -6,7 +6,7 @@ package com.strix.lab.performance {
     import flash.utils.flash_proxy;
     
     
-    public class Uint32Array extends Proxy implements NumericArray  {
+    public class Uint32Array extends Proxy implements NumericArray, Uint32ArraySlice {
         
         private var
             _length : uint,
@@ -58,6 +58,14 @@ package com.strix.lab.performance {
         flash_proxy override function setProperty( index:*, value:* ) : void {
             data.position = offset + uint(index)*4;
             data.writeUnsignedInt(uint(value));
+        }
+        
+        public function get start() : uint {
+            return 0;
+        }
+        
+        public function get array() : Uint32Array {
+            return this;
         }
         
     }

@@ -579,6 +579,273 @@ FREObject Rsh_32u( FREContext ctx, void* funcData, uint32_t argc, FREObject argv
 }
 
 
+FREObject Set_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	FREObject result;
+	FREByteArray dst_array;
+	double val;
+	float fval;
+	uint32_t dst_offset;
+	uint32_t dst_length;
+
+	FREAcquireByteArray(argv[0], &dst_array);
+	FREGetObjectAsDouble(argv[1], &val);
+	FREGetObjectAsUint32(argv[2], &dst_offset);
+	FREGetObjectAsUint32(argv[3], &dst_length);
+
+	fval = (float)val;
+	float* dst = (float*)(dst_array.bytes+dst_offset);
+
+	uint32_t i;
+
+	for( i = 0; i < dst_length; i++ ) {
+		dst[i] = fval;
+	}
+
+	FREReleaseByteArray(argv[0]);
+	FRENewObjectFromBool(1, &result);
+
+	return result;
+}
+
+FREObject Copy_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	FREObject result;
+	FREByteArray dst_array;
+	FREByteArray src_array;
+	uint32_t dst_offset;
+	uint32_t src_offset;
+	uint32_t dst_length;
+
+
+	FREAcquireByteArray(argv[0], &dst_array);
+	FREAcquireByteArray(argv[1], &src_array);
+	FREGetObjectAsUint32(argv[2], &dst_offset);
+	FREGetObjectAsUint32(argv[3], &src_offset);
+	FREGetObjectAsUint32(argv[4], &dst_length);
+
+	float* dst = (float*)(dst_array.bytes+dst_offset);
+	float* src = (float*)(src_array.bytes+src_offset);
+
+	uint32_t i;
+
+	for( i = 0; i < dst_length; i++ ) {
+		dst[i] = src[i];
+	}
+
+	FREReleaseByteArray(argv[1]);
+	FREReleaseByteArray(argv[0]);
+	FRENewObjectFromBool(1, &result);
+
+	return result;
+}
+
+FREObject Move_32f( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	FREObject result;
+	FREByteArray dst_array;
+	FREByteArray src_array;
+	uint32_t dst_offset;
+	uint32_t src_offset;
+	uint32_t dst_length;
+
+
+	FREAcquireByteArray(argv[0], &dst_array);
+	FREAcquireByteArray(argv[1], &src_array);
+	FREGetObjectAsUint32(argv[2], &dst_offset);
+	FREGetObjectAsUint32(argv[3], &src_offset);
+	FREGetObjectAsUint32(argv[4], &dst_length);
+
+	float* dst = (float*)(dst_array.bytes+dst_offset);
+	float* src = (float*)(src_array.bytes+src_offset);
+
+	uint32_t i;
+
+	for( i = 0; i < dst_length; i++ ) {
+		dst[i] = src[i];
+		src[i] = 0.0f;
+	}
+
+	FREReleaseByteArray(argv[1]);
+	FREReleaseByteArray(argv[0]);
+	FRENewObjectFromBool(1, &result);
+
+	return result;
+}
+
+
+FREObject Set_32i( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	FREObject result;
+	FREByteArray dst_array;
+	int32_t val;
+	uint32_t dst_offset;
+	uint32_t dst_length;
+
+	FREAcquireByteArray(argv[0], &dst_array);
+	FREGetObjectAsInt32(argv[1], &val);
+	FREGetObjectAsUint32(argv[2], &dst_offset);
+	FREGetObjectAsUint32(argv[3], &dst_length);
+
+	int32_t* dst = (int32_t*)(dst_array.bytes+dst_offset);
+
+	uint32_t i;
+
+	for( i = 0; i < dst_length; i++ ) {
+		dst[i] = val;
+	}
+
+	FREReleaseByteArray(argv[0]);
+	FRENewObjectFromBool(1, &result);
+
+	return result;
+}
+
+FREObject Copy_32i( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	FREObject result;
+	FREByteArray dst_array;
+	FREByteArray src_array;
+	uint32_t dst_offset;
+	uint32_t src_offset;
+	uint32_t dst_length;
+
+	FREAcquireByteArray(argv[0], &dst_array);
+	FREAcquireByteArray(argv[1], &src_array);
+	FREGetObjectAsUint32(argv[2], &dst_offset);
+	FREGetObjectAsUint32(argv[3], &src_offset);
+	FREGetObjectAsUint32(argv[4], &dst_length);
+
+	int32_t* dst = (int32_t*)(dst_array.bytes+dst_offset);
+	int32_t* src = (int32_t*)(src_array.bytes+src_offset);
+
+	uint32_t i;
+
+	for( i = 0; i < dst_length; i++ ) {
+		dst[i] = src[i];
+	}
+
+	FREReleaseByteArray(argv[1]);
+	FREReleaseByteArray(argv[0]);
+	FRENewObjectFromBool(1, &result);
+
+	return result;
+}
+
+FREObject Move_32i( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	FREObject result;
+	FREByteArray dst_array;
+	FREByteArray src_array;
+	uint32_t dst_offset;
+	uint32_t src_offset;
+	uint32_t dst_length;
+
+	FREAcquireByteArray(argv[0], &dst_array);
+	FREAcquireByteArray(argv[1], &src_array);
+	FREGetObjectAsUint32(argv[2], &dst_offset);
+	FREGetObjectAsUint32(argv[3], &src_offset);
+	FREGetObjectAsUint32(argv[4], &dst_length);
+
+	int32_t* dst = (int32_t*)(dst_array.bytes+dst_offset);
+	int32_t* src = (int32_t*)(src_array.bytes+src_offset);
+
+	uint32_t i;
+
+	for( i = 0; i < dst_length; i++ ) {
+		dst[i] = src[i];
+		src[i] = 0;
+	}
+
+	FREReleaseByteArray(argv[1]);
+	FREReleaseByteArray(argv[0]);
+	FRENewObjectFromBool(1, &result);
+
+	return result;
+}
+
+
+FREObject Set_32u( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	FREObject result;
+	FREByteArray dst_array;
+	uint32_t val;
+	uint32_t dst_offset;
+	uint32_t dst_length;
+
+	FREAcquireByteArray(argv[0], &dst_array);
+	FREGetObjectAsUint32(argv[1], &val);
+	FREGetObjectAsUint32(argv[2], &dst_offset);
+	FREGetObjectAsUint32(argv[3], &dst_length);
+
+	uint32_t* dst = (uint32_t*)(dst_array.bytes+dst_offset);
+
+	uint32_t i;
+
+	for( i = 0; i < dst_length; i++ ) {
+		dst[i] = val;
+	}
+
+	FREReleaseByteArray(argv[0]);
+	FRENewObjectFromBool(1, &result);
+
+	return result;
+}
+
+FREObject Copy_32u( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	FREObject result;
+	FREByteArray dst_array;
+	FREByteArray src_array;
+	uint32_t dst_offset;
+	uint32_t src_offset;
+	uint32_t dst_length;
+
+	FREAcquireByteArray(argv[0], &dst_array);
+	FREAcquireByteArray(argv[1], &src_array);
+	FREGetObjectAsUint32(argv[2], &dst_offset);
+	FREGetObjectAsUint32(argv[3], &src_offset);
+	FREGetObjectAsUint32(argv[4], &dst_length);
+
+	uint32_t* dst = (uint32_t*)(dst_array.bytes+dst_offset);
+	uint32_t* src = (uint32_t*)(src_array.bytes+src_offset);
+
+	uint32_t i;
+
+	for( i = 0; i < dst_length; i++ ) {
+		dst[i] = src[i];
+	}
+
+	FREReleaseByteArray(argv[1]);
+	FREReleaseByteArray(argv[0]);
+	FRENewObjectFromBool(1, &result);
+
+	return result;
+}
+
+FREObject Move_32u( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
+	FREObject result;
+	FREByteArray dst_array;
+	FREByteArray src_array;
+	uint32_t dst_offset;
+	uint32_t src_offset;
+	uint32_t dst_length;
+
+	FREAcquireByteArray(argv[0], &dst_array);
+	FREAcquireByteArray(argv[1], &src_array);
+	FREGetObjectAsUint32(argv[2], &dst_offset);
+	FREGetObjectAsUint32(argv[3], &src_offset);
+	FREGetObjectAsUint32(argv[4], &dst_length);
+
+	uint32_t* dst = (uint32_t*)(dst_array.bytes+dst_offset);
+	uint32_t* src = (uint32_t*)(src_array.bytes+src_offset);
+
+	uint32_t i;
+
+	for( i = 0; i < dst_length; i++ ) {
+		dst[i] = src[i];
+		src[i] = 0;
+	}
+
+	FREReleaseByteArray(argv[1]);
+	FREReleaseByteArray(argv[0]);
+	FRENewObjectFromBool(1, &result);
+
+	return result;
+}
+
 
 FREObject GetMemoryAddress( FREContext ctx, void* funcData, uint32_t argc, FREObject argv[] ) {
     FREObject result;
@@ -597,7 +864,7 @@ FREObject GetMemoryAddress( FREContext ctx, void* funcData, uint32_t argc, FREOb
 
 
 void contextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctions, const FRENamedFunction** functions) {
-    *numFunctions = 75;
+    *numFunctions = 84;
     FRENamedFunction* func = (FRENamedFunction*) malloc(sizeof(FRENamedFunction) * (*numFunctions));
 
     EXPORT_FUNC(func[0],    "GetMemoryAddress",    GetMemoryAddress);
@@ -678,6 +945,19 @@ void contextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
     EXPORT_FUNC(func[72],   "Not_32u",          Not_32u);
     EXPORT_FUNC(func[73],   "Lsh_32u",          Lsh_32u);
     EXPORT_FUNC(func[74],   "Rsh_32u",          Rsh_32u);
+
+    EXPORT_FUNC(func[75],   "Set_32f",          Set_32f);
+	EXPORT_FUNC(func[76],   "Copy_32f",         Copy_32f);
+	EXPORT_FUNC(func[77],   "Move_32f",         Move_32f);
+
+    EXPORT_FUNC(func[78],   "Set_32i",          Set_32i);
+	EXPORT_FUNC(func[79],   "Copy_32i",         Copy_32i);
+	EXPORT_FUNC(func[80],   "Move_32i",         Move_32i);
+
+    EXPORT_FUNC(func[81],   "Set_32u",          Set_32u);
+	EXPORT_FUNC(func[82],   "Copy_32u",         Copy_32u);
+	EXPORT_FUNC(func[83],   "Move_32u",         Move_32u);
+
 
 
     *functions = func;

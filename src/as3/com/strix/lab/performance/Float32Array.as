@@ -6,7 +6,7 @@ package com.strix.lab.performance {
     import flash.utils.flash_proxy;
     
     
-    public class Float32Array extends Proxy implements NumericArray {
+    public class Float32Array extends Proxy implements NumericArray, Float32ArraySlice {
         
         private var
             _length : uint,
@@ -34,6 +34,8 @@ package com.strix.lab.performance {
                 throw new Error("'length' cannot be 0");
             }
             
+            _length = value;
+            
             var alignment : uint = getMemoryAddress(data) % 16;
             
             if( alignment == 0 ) {
@@ -60,5 +62,16 @@ package com.strix.lab.performance {
             data.writeFloat(Number(value));
         }
         
+        public function get start() : uint {
+            return 0;
+        }
+        
+        public function get stride() : uint {
+            return 1;
+        }
+        
+        public function get array() : Float32Array {
+            return this;
+        }
     }
 }
