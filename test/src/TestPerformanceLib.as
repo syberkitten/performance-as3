@@ -80,7 +80,7 @@ package flexUnitTests {
             vfset(vfr2, fr);
             vfset(vfa, fa);
             vfset(vfb, fb);
-            vfset(vfb, fc);
+            vfset(vfc, fc);
         }
        
         
@@ -410,6 +410,16 @@ package flexUnitTests {
             
             assertFalse(
                 vfr[0] as Number == Infinity
+            );
+        }
+        
+        [Test]
+        public function testFMA32f() : void {
+            vffma(vfr, vfa, vfb, vfc);             
+          
+            assertTrue(
+                "Error exceeded absolute tolerance",
+                nearEquals(vfr[0] as Number, fa*fb + fc)
             );
         }
 
