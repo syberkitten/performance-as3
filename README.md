@@ -109,8 +109,8 @@ Adobe will not require you to purchase a license for the use of domainMemory and
 - Integer array arithmetic: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Integer-array-arithmetic))
 - Integer array bitwise functions: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Integer-array-bitwise-functions))
 - Support functions: In development ([Win32](https://github.com/martinkallman/performance-as3/wiki/Support-functions))
+- Range support: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Ranges))
 - Vector and matrix math: Planned
-- Range support: In development
 - Double-precision array math: Depending on community response
 - Compression algorithms: Depending on community response
 - Data structures and STL containers: Depending on feasibility
@@ -147,6 +147,7 @@ General
  - [Installing, upgrading & troubleshooting](https://github.com/martinkallman/performance-as3/wiki/Installing,-upgrading-and-managing-faulty-state)
  - [Data types](https://github.com/martinkallman/performance-as3/wiki/Data-types)
  - [Function naming](https://github.com/martinkallman/performance-as3/wiki/Function-naming)
+ - [Ranges](https://github.com/martinkallman/performance-as3/wiki/Ranges)
 
 Reference
  - [Single-precision array math](https://github.com/martinkallman/performance-as3/wiki/Single-precision-array-math)
