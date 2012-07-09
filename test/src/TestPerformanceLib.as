@@ -2,8 +2,12 @@ package flexUnitTests {
     
     import com.strix.lab.performance.Float32Array;
     import com.strix.lab.performance.PerformanceLibrary;
+    import com.strix.lab.performance.vfacos;
     import com.strix.lab.performance.vfadd;
     import com.strix.lab.performance.vfaddc;
+    import com.strix.lab.performance.vfasin;
+    import com.strix.lab.performance.vfatan;
+    import com.strix.lab.performance.vfatan2;
     import com.strix.lab.performance.vfcos;
     import com.strix.lab.performance.vfdiv;
     import com.strix.lab.performance.vfdivc;
@@ -65,8 +69,8 @@ package flexUnitTests {
         }
        
         
-        private function frand() : Number {
-            if( Math.random() > 0.5 ) {
+        private function frand( positiveOnly:Boolean=false ) : Number {
+            if( Math.random() > 0.5 || positiveOnly ) {
                 return int(Math.random()*1000);
             } else {
                 return int(Math.random()*-1000);
@@ -239,7 +243,61 @@ package flexUnitTests {
                 nearEquals(vfr[0] as Number, fr)
             );
         }
+        
+        [Test]
+        public function testAsin32f() : void {
+            fa = 0.1234;
+            vfset(vfa, fa);
+            vfasin(vfr, vfa);             
+            fr = Math.asin(fa);
 
-    
+            assertTrue(
+                "Error exceeded absolute tolerance",
+                nearEquals(vfr[0] as Number, fr)
+            );
+        }
+        
+        [Test]
+        public function testAcos32f() : void {
+            fa = 0.1234;
+            vfset(vfa, fa);
+            vfacos(vfr, vfa);             
+            fr = Math.acos(fa);
+            
+            assertTrue(
+                "Error exceeded absolute tolerance",
+                nearEquals(vfr[0] as Number, fr)
+            );
+        }
+        
+        [Test]
+        public function testAtan32f() : void {
+            fa = 0.1234;
+            vfset(vfa, fa);
+            vfatan(vfr, vfa);             
+            fr = Math.atan(fa);
+            
+            assertTrue(
+                "Error exceeded absolute tolerance",
+                nearEquals(vfr[0] as Number, fr)
+            );
+        }
+        
+        [Test]
+        public function testAtan232f() : void {
+            fa = 0.1234;
+            fb = 0.2345;
+            vfset(vfa, fa);
+            vfset(vfb, fb);
+            vfatan2(vfr, vfa, vfb)             
+            fr = Math.atan2(fa, fb);
+            
+            assertTrue(
+                "Error exceeded absolute tolerance",
+                nearEquals(vfr[0] as Number, fr)
+            );
+        }
+
     }
+    
 }
