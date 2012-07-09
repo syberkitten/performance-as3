@@ -139,7 +139,7 @@ var birds : MadBirds = new MadBirds;
 
 //These hold position updates
 var movementX : Float32Array;
-var movementY : Floar32Array;
+var movementY : Float32Array;
 
 ...
 
