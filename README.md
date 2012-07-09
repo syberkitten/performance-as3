@@ -100,16 +100,17 @@ Adobe will not require you to purchase a license for the use of domainMemory and
 ## Features and roadmap
 
 - Target platforms
-   - Win32 (AIR native extension)
-   - Mac OS X (AIR native extension)
-   - iOS (AIR native extension)
-   - Android (AIR native extension)
+   - Win32 (ANE)
+   - Mac OS X (ANE)
+   - iOS (ANE, Accelerate Framework)
+   - Android (ANE)
    - Flash Player (Adobe Alchemy, Pixel Bender)
 - Single-precision array math: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Single-precision-array-math))
 - Integer array arithmetic: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Integer-array-arithmetic))
 - Integer array bitwise functions: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Integer-array-bitwise-functions))
 - Support functions: In development ([Win32](https://github.com/martinkallman/performance-as3/wiki/Support-functions))
 - Vector and matrix math: Planned
+- Range support: In development
 - Double-precision array math: Depending on community response
 - Compression algorithms: Depending on community response
 - Data structures and STL containers: Depending on feasibility
