@@ -2,6 +2,7 @@ package flexUnitTests {
     
     import com.strix.lab.performance.Float32Array;
     import com.strix.lab.performance.PerformanceLibrary;
+    import com.strix.lab.performance.vfabs;
     import com.strix.lab.performance.vfacos;
     import com.strix.lab.performance.vfadd;
     import com.strix.lab.performance.vfaddc;
@@ -9,14 +10,18 @@ package flexUnitTests {
     import com.strix.lab.performance.vfatan;
     import com.strix.lab.performance.vfatan2;
     import com.strix.lab.performance.vfcbrt;
+    import com.strix.lab.performance.vfceil;
     import com.strix.lab.performance.vfcos;
     import com.strix.lab.performance.vfdiv;
     import com.strix.lab.performance.vfdivc;
     import com.strix.lab.performance.vfdivcr;
     import com.strix.lab.performance.vfexp;
+    import com.strix.lab.performance.vffloor;
     import com.strix.lab.performance.vffma;
     import com.strix.lab.performance.vflog;
     import com.strix.lab.performance.vflog10;
+    import com.strix.lab.performance.vfmod;
+    import com.strix.lab.performance.vfmodc;
     import com.strix.lab.performance.vfmul;
     import com.strix.lab.performance.vfmulc;
     import com.strix.lab.performance.vfpow;
@@ -32,6 +37,7 @@ package flexUnitTests {
     
     import flexunit.framework.Assert;
     
+    import org.flexunit.asserts.assertEquals;
     import org.flexunit.asserts.assertFalse;
     import org.flexunit.asserts.assertNotNull;
     import org.flexunit.asserts.assertTrue;
@@ -420,6 +426,65 @@ package flexUnitTests {
             assertTrue(
                 "Error exceeded absolute tolerance",
                 nearEquals(vfr[0] as Number, fa*fb + fc)
+            );
+        }
+        
+        [Test]
+        public function testCeil32f() : void {
+            vfceil(vfr, vfa);             
+            fr = Math.ceil(fa);
+            
+            assertEquals(
+                vfr[0] as Number, fr
+            );
+        }
+        
+        [Test]
+        public function testFloor32f() : void {
+            vffloor(vfr, vfa);             
+            fr = Math.ceil(fa);
+            
+            assertEquals(
+                vfr[0] as Number, fr
+            );
+        }
+        
+        [Test]
+        public function testAbs32f() : void {
+            vfabs(vfr, vfa);            
+            fr = Math.abs(fa);
+            
+            assertEquals(
+                vfr[0] as Number, fr
+            );
+        }
+        
+        [Test]
+        public function testMod32f() : void {
+            fa = 123.4567;
+            fb = 34.5678;
+            vfset(vfa, fa);
+            vfset(vfb, fb);
+            vfmod(vfr, vfa, vfb);             
+            fr = fa % fb;
+            
+            assertTrue(
+                "Error exceeded absolute tolerance",
+                nearEquals(vfr[0] as Number, fr)
+            );
+        }
+        
+        [Test]
+        public function testModC32f() : void {
+            fa = 123.4567;
+            fval = 34.5678;
+            vfset(vfa, fa);
+            vfmodc(vfr, vfa, fval);             
+            fr = fa % fval;
+            
+            assertTrue(
+                "Error exceeded absolute tolerance",
+                nearEquals(vfr[0] as Number, fr)
             );
         }
 
