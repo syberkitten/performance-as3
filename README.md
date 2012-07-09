@@ -121,23 +121,30 @@ Adobe will not require you to purchase a license for the use of domainMemory and
 Please read the instructions for [installing, upgrading & troubleshooting](https://github.com/martinkallman/performance-as3/wiki/Installing,-upgrading-and-managing-faulty-state) to add the extension to your project.
 
 ```actionscript
-var sum : Float32Array = new Float32Array(4),
-    a   : Float32Array = new Float32Array(4),
-    b   : Float32Array = new Float32Array(4);
+class MadBirds {
+   public var x : Float32Array;
+   public var y : Float32Array;
+   private var birdCount : uint;
 
-//This will be changed with the planned support functions and domainMemory
-for( var i : uint = 0; i < 4; i++ ) {
-    src1[i] = 123.4;
-    src2[i] = 234.5;
+   public function updatePositions( movementX:Float32Array, movementY:Float32Array ) : void {
+      //x = movementX + x
+      vfadd(x, movementX, x);
+      //y = movementY + y
+      vfadd(y, movementY, y);
+   }
 }
-    
-//Vectorized add: sum = a + b
-vfadd(sum, a, b);
 
-trace(sum[0] as Number);
+//This holds all our birds
+var birds : MadBirds = new MadBirds;
 
-//You MUST call this or the OS will be sad
-PerformanceLibrary.dispose();
+//These hold position updates
+var movementX : Float32Array;
+var movementY : Floar32Array;
+
+...
+
+//Update every bird's position
+birds.updatePositions(movementX, movementY);
 ```
 
 <br><br>
