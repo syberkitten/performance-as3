@@ -118,7 +118,7 @@ Adobe will not require you to purchase a license for the use of domainMemory and
    - High-resolution timers: In development
 - Algorithms
    - Compression: LZ4 (Planned), PackBits (Planned), PFOR+PFOR-DELTA (Planned)
-   - Hashing: XXH (Planned)
+   - Hashing: XXH (Planned), Wang (Planned)
 - Data structures and STL containers: Depending on feasibility
 
 <br><br>
