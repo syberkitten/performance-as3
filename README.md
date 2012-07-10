@@ -116,7 +116,10 @@ Adobe will not require you to purchase a license for the use of domainMemory and
    - Range support: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Ranges))
 - Timers
    - High-resolution timers: In development
-- Compression algorithms: Depending on community response
+- Compression algorithms
+   - LZ*: Planned
+   - PackBits: Planned
+   - PDICT, PFOR, PFOR-DELTA: Plannet
 - Data structures and STL containers: Depending on feasibility
 
 <br><br>
