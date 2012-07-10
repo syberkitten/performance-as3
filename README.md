@@ -105,13 +105,17 @@ Adobe will not require you to purchase a license for the use of domainMemory and
    - iOS (ANE, Accelerate Framework)
    - Android (ANE)
    - Flash Player (Adobe Alchemy, Pixel Bender)
-- Single-precision array math: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Single-precision-array-math))
-- Integer array arithmetic: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Integer-array-arithmetic))
-- Integer array bitwise functions: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Integer-array-bitwise-functions))
-- Support functions: In development ([Win32](https://github.com/martinkallman/performance-as3/wiki/Support-functions))
-- Range support: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Ranges))
-- Vector and matrix math: Planned
-- Double-precision array math: Depending on community response
+- Math 
+   - Single-precision array math: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Single-precision-array-math))
+   - Integer array arithmetic: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Integer-array-arithmetic))
+   - Integer array bitwise functions: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Integer-array-bitwise-functions))
+   - Vector and matrix math: Planned
+   - Double-precision array math: Depending on community response
+- Misc
+   - Support functions: In development ([Win32](https://github.com/martinkallman/performance-as3/wiki/Support-functions))
+   - Range support: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Ranges))
+- Timers
+   - High-resolution timers: In development
 - Compression algorithms: Depending on community response
 - Data structures and STL containers: Depending on feasibility
 
