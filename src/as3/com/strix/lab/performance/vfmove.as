@@ -1,5 +1,9 @@
 package com.strix.lab.performance {
     
+    /**
+    * dst = src
+    * src = 0.0
+    */
     public function vfmove( dst:Float32ArraySlice, src:Float32ArraySlice ) : void {
         var dstArray : Float32Array = dst.array,
             srcArray : Float32Array = src.array;

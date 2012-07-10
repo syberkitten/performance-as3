@@ -1,5 +1,8 @@
 package com.strix.lab.performance {
     
+    /**
+     * dst = src, src = 0
+     */
     public function vumove( dst:Uint32ArraySlice, src:Uint32ArraySlice ) : void {
         var dstArray : Uint32Array = dst.array,
             srcArray : Uint32Array = src.array;

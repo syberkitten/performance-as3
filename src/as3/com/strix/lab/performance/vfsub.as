@@ -1,5 +1,8 @@
 package com.strix.lab.performance {
     
+    /**
+     * dst = src1 - src2
+     */
     public function vfsub( dst:Float32Array, src1:Float32Array, src2:Float32Array ) : void {
         PerformanceLibrary.context.call(
             "Sub_32f",

@@ -1,5 +1,8 @@
 package com.strix.lab.performance {
     
+    /**
+     * dst = src
+     */
     public function vucopy( dst:Uint32ArraySlice, src:Uint32ArraySlice ) : void {
         var dstArray : Uint32Array = dst.array,
             srcArray : Uint32Array = src.array;

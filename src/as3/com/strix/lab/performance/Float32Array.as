@@ -66,10 +66,6 @@ package com.strix.lab.performance {
             return 0;
         }
         
-        public function get stride() : uint {
-            return 1;
-        }
-        
         public function get array() : Float32Array {
             return this;
         }

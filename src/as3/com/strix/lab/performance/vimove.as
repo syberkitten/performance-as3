@@ -1,5 +1,8 @@
 package com.strix.lab.performance {
     
+    /**
+     * dst = src, src = 0
+     */
     public function vimove( dst:Int32ArraySlice, src:Int32ArraySlice ) : void {
         var dstArray : Int32Array = dst.array,
             srcArray : Int32Array = src.array;

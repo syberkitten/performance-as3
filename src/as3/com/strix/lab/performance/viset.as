@@ -1,5 +1,8 @@
 package com.strix.lab.performance {
     
+    /**
+     * dst = val
+     */
     public function viset( dst:Int32ArraySlice, val:Number ) : void {
         var dstArray : Int32Array = dst.array
 

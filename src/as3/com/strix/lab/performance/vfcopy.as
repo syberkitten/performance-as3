@@ -1,5 +1,8 @@
 package com.strix.lab.performance {
     
+    /**
+    * dst = src
+    */
     public function vfcopy( dst:Float32ArraySlice, src:Float32ArraySlice ) : void {
         var dstArray : Float32Array = dst.array,
             srcArray : Float32Array = src.array;
