@@ -119,7 +119,7 @@ Adobe will not require you to purchase a license for the use of domainMemory and
 - Compression algorithms
    - LZ*: Planned
    - PackBits: Planned
-   - PDICT, PFOR, PFOR-DELTA: Plannet
+   - PDICT, PFOR, PFOR-DELTA: Planned
 - Data structures and STL containers: Depending on feasibility
 
 <br><br>
