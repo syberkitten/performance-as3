@@ -169,7 +169,9 @@ Reference
 ## Developer's notes
  - This library requires a SSE2-capable machine
  - Currently all transcendental functions are scalar. Will investigate moving to SSE2 variants
+ - To compile with GCC/MinGW, use the following flags in order to benefit from vectorization: `-msse2 -ftree-vectorize`
 
+<br><br>
 
 ## Credits
  - A special thanks to Naoki Shibata for his efforts with SLEEF, which we rely upon
