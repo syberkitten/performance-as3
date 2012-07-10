@@ -112,7 +112,7 @@ Adobe will not require you to purchase a license for the use of domainMemory and
    - Vector and matrix math: Planned
    - Double-precision array math: Depending on community response
 - Misc
-   - Support functions: In development ([Win32](https://github.com/martinkallman/performance-as3/wiki/Support-functions))
+   - Support functions: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Support-functions))
    - Range support: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Ranges))
 - Timers
    - High-resolution timer: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/PerformanceTimer))
@@ -167,6 +167,7 @@ Reference
     - [Single-precision array math](https://github.com/martinkallman/performance-as3/wiki/Single-precision-array-math)
     - [Integer array arithmetic](https://github.com/martinkallman/performance-as3/wiki/Integer-array-arithmetic)
     - [Integer array bitwise functions](https://github.com/martinkallman/performance-as3/wiki/Integer-array-bitwise-functions)
+ - Misc
     - [Support functions](https://github.com/martinkallman/performance-as3/wiki/Support-functions)
  - Timer
     - [PerformanceTimer](https://github.com/martinkallman/performance-as3/wiki/PerformanceTimer)
