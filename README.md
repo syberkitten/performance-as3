@@ -114,6 +114,7 @@ Adobe will not require you to purchase a license for the use of domainMemory and
 - Misc
    - Support functions: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Support-functions))
    - Range support: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Ranges))
+   - Comparisons, masks, select: In development
 - Timers
    - High-resolution timer: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/PerformanceTimer))
 - Algorithms
