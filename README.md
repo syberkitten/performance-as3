@@ -106,21 +106,21 @@ Adobe will not require you to purchase a license for the use of domainMemory and
    - Android (ANE)
    - Flash Player (Adobe Alchemy, Pixel Bender)
 - Math 
-   - Single-precision array math: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Single-precision-array-math))
-   - Integer array arithmetic: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Integer-array-arithmetic))
-   - Integer array bitwise functions: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Integer-array-bitwise-functions))
-   - Vector and matrix math: Planned
-   - Double-precision array math: Depending on community response
+   - **Single-precision array math** (Implemented, Win32)
+   - **Integer array arithmetic** (Implemented, Win32)
+   - **Integer array bitwise functions** (Implemented, Win32)
+   - Vector and matrix math (Planned)
+   - Double-precision array math (Depending on community response)
 - Misc
-   - Support functions: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Support-functions))
-   - Range support: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/Ranges))
-   - Comparisons, masks, select: In development
+   - **Support functions** (Implemented, Win32)
+   - **Range support** (Implemented, Win32)
+   - Comparisons, masks, select (In development)
 - Timers
-   - High-resolution timer: Implemented ([Win32](https://github.com/martinkallman/performance-as3/wiki/PerformanceTimer))
+   - **High-resolution timer** (Implemented, Win32)
 - Algorithms
    - Compression: LZ4 (Planned), PackBits (Planned), PFOR+PFOR-DELTA (Planned)
-   - Hashing: XXH (Planned), Wang (Planned)
-- Data structures and STL containers: Depending on feasibility
+   - **Hashing:** **XXH** (Implemented, Win32), **Wang** (Implemented, Win32) 
+- Data structures and containers (Depending on feasibility)
 
 <br><br>
 
@@ -186,4 +186,4 @@ Reference
 <br><br>
 
 ## Credits
- - A special thanks to Naoki Shibata for his efforts with SLEEF, which we rely upon
+ - A special thanks to Naoki Shibata and Yann Collet
