@@ -174,6 +174,8 @@ Reference
     - [Masks](https://github.com/martinkallman/performance-as3/wiki/Masks)
  - Timer
     - [PerformanceTimer](https://github.com/martinkallman/performance-as3/wiki/PerformanceTimer)
+ - Algorithms
+    - [Hashing: XXH, Wang](https://github.com/martinkallman/performance-as3/wiki/Algorithms)
 
 <br><br>
 
