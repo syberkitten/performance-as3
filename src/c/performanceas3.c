@@ -15,6 +15,8 @@
 
 #include "timer/timer.h"
 
+#include "hash/hash.h"
+
 
 
 /** Core Functions **/
@@ -38,11 +40,11 @@ FREObject GetMemoryAddress( FREContext ctx, void* funcData, uint32_t argc, FREOb
 /** Extension Functions **/
 
 void contextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctions, const FRENamedFunction** functions) {
-    *numFunctions = 87;
+    *numFunctions = 90;
     FRENamedFunction* func = (FRENamedFunction*) malloc(sizeof(FRENamedFunction) * (*numFunctions));
 
     EXPORT_FUNC(func[0],    "GetMemoryAddress", GetMemoryAddress);
-    EXPORT_FUNC(func[1],    "Add_32f",          Add_32f);
+    EXPORT_FUNC(func[1],    "Add_32f", 			Add_32f);
     EXPORT_FUNC(func[2],    "AddC_32f",         AddC_32f);
     EXPORT_FUNC(func[3],    "Sub_32f",          Sub_32f);
     EXPORT_FUNC(func[4],    "SubC_32f",         SubC_32f);
@@ -135,6 +137,11 @@ void contextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
     EXPORT_FUNC(func[84],   "TimerRefreshFrequency", TimerStart);
     EXPORT_FUNC(func[85],   "TimerStart",       TimerStart);
     EXPORT_FUNC(func[86],   "TimerTick",        TimerTick);
+
+    EXPORT_FUNC(func[87],   "Hash_Wang_32u",    Hash_Wang_32u);
+    EXPORT_FUNC(func[88],   "Hash_XXHFast_8u",  Hash_XXHFast_8u);
+    EXPORT_FUNC(func[89],   "Hash_XXHStrong_8u", Hash_XXHStrong_8u);
+
 
     *functions = func;
 }
