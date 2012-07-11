@@ -170,6 +170,8 @@ Reference
     - [Integer array bitwise functions](https://github.com/martinkallman/performance-as3/wiki/Integer-array-bitwise-functions)
  - Misc
     - [Support functions](https://github.com/martinkallman/performance-as3/wiki/Support-functions)
+    - [Comparison and select functions](https://github.com/martinkallman/performance-as3/wiki/Compare-and-select-functions)
+    - [Masks](https://github.com/martinkallman/performance-as3/wiki/Masks)
  - Timer
     - [PerformanceTimer](https://github.com/martinkallman/performance-as3/wiki/PerformanceTimer)
 
