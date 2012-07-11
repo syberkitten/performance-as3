@@ -188,4 +188,4 @@ Reference
 <br><br>
 
 ## Credits
- - A special thanks to Naoki Shibata and Yann Collet
+ - A special thanks to Naoki Shibata, Yann Collet, Thomas Wang
