@@ -1,6 +1,11 @@
 ActionScript 3 Performance Primitives
 =====================================
 
+## News
+
+ - 2012-07-17: Full rewrite with vectorization (SSE2) and multithreading support underway
+ 
+
 ## Introduction
 
 This is an experimental library for ActionScript 3 geared towards high-performance math, and is losely modeled on the Intel Performance Primitives library. It is intended for use with games in subsystems that are performance-sensitive, such as graphics, physics and networking.
