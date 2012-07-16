@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="com.strix.lab.as3pp.ArrayMath"/>
+    <classEntry path="com.strix.lab.as3pp.PerformancePrimitives"/>
+    <classEntry path="com.strix.lab.as3pp.ArrayUtils"/>
+    <classEntry path="com.strix.lab.as3pp.FastMath"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>
