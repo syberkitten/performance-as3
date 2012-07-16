@@ -5,6 +5,7 @@ ActionScript 3 Performance Primitives
 
  - 2012-07-17: Full rewrite with vectorization (SSE2) and multithreading support underway
  
+<br>
 
 ## Introduction
 
