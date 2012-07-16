@@ -18,7 +18,7 @@ extern "C" {
 
 
     void contextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctions, const FRENamedFunction** functions) {
-        *numFunctions = 5;
+        *numFunctions = 11;
         FRENamedFunction* func = (FRENamedFunction*) malloc(sizeof(FRENamedFunction) * (*numFunctions));
 
         EXPORT_FUNC(func[0],    "GetMemoryAddress", GetMemoryAddress);
@@ -27,6 +27,14 @@ extern "C" {
         EXPORT_FUNC(func[2],    "Sub_32f",          Sub_32f);
         EXPORT_FUNC(func[3],    "Mul_32f",          Mul_32f);
         EXPORT_FUNC(func[4],    "Div_32f",          Div_32f);
+
+        EXPORT_FUNC(func[5],    "AddC_32f",         AddC_32f);
+        EXPORT_FUNC(func[6],    "SubC_32f",         SubC_32f);
+        EXPORT_FUNC(func[7],    "MulC_32f",         MulC_32f);
+        EXPORT_FUNC(func[8],    "DivC_32f",         DivC_32f);
+
+        EXPORT_FUNC(func[9],    "SubCRev_32f",      SubCRev_32f);
+        EXPORT_FUNC(func[10],   "DivCRev_32f",      DivCRev_32f);
 
         *functions = func;
     }
