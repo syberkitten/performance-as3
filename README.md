@@ -106,10 +106,10 @@ Adobe will not require you to purchase a license for the use of domainMemory and
 ## Features and roadmap
 
 - Target platforms
-   - Win32 (ANE)
-   - Mac OS X (ANE)
+   - Win32 (ANE, AMD Framewave)
+   - Mac OS X (ANE, AMD Framewave)
    - iOS (ANE, Accelerate Framework)
-   - Android (ANE)
+   - Android (ANE, Renderscript)
    - Flash Player (Adobe Alchemy, Pixel Bender)
 - Math 
    - **Single-precision array math** (Implemented, Win32)
