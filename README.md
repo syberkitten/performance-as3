@@ -2,7 +2,8 @@ ActionScript 3 Performance Primitives
 =====================================
 
 ## News
-
+ - 2012-07-20: Drafting support for Flash Player through Adobe Alchemy 2
+ - 2012-07-20: Baseline functionality almost complete: floating-point array math, vector math, matrix math
  - 2012-07-17: Full rewrite with vectorization (SSE2) and multithreading support underway
  
 <br>
