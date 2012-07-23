@@ -40,7 +40,7 @@ package com.strix.lab.as3pp.matrix {
             t = new Float32Array(TEMP_SIZE);
         }
         
-        private static function assertNoAliasing( m1:Matrix44Array, m2:Matrix44Array ) : void {
+        private static function assertNoAliasing( m1:Matrix3DArray, m2:Matrix3DArray ) : void {
             for( var m1r : uint = 0; m1r < 4; m1r++ ) {
                 for( var m1c : uint = 0; m1c < 4; m1c++ ) {
                     for( var m2r : uint = 0; m2r < 4; m2r++ ) {
@@ -56,7 +56,7 @@ package com.strix.lab.as3pp.matrix {
             }
         }
         
-        public static function mul_44( dst:Matrix44Array, src1:Matrix44Array, src2:Matrix44Array ) : void {
+        public static function mul_3d( dst:Matrix3DArray, src1:Matrix3DArray, src2:Matrix3DArray ) : void {
             if( PerformancePrimitives.debugMode ) {
                 if( dst === src1 || dst === src2 ) {
                     throw new AliasingError("Aliasing is not allowed. DST, SRC1 and SRC2 must be unique");
@@ -130,7 +130,7 @@ package com.strix.lab.as3pp.matrix {
             }
         }
         
-        public static function transform3D( dst:Vector3DArray, src1:Matrix44Array, src2:Vector3DArray ) : void {
+        public static function transf_3d( dst:Vector3DArray, src1:Matrix3DArray, src2:Vector3DArray ) : void {
             t.length = dst.length;
             
             ArrayMath.mul_32f(dst.x, src1.data[R1][C1], src2.x);
@@ -154,7 +154,7 @@ package com.strix.lab.as3pp.matrix {
             ArrayMath.muladd_32f(dst.w, src1.data[R4][C4], src2.w);
         }
         
-        public static function transformC3D( dst:Vector3DArray, src1:Matrix3D, src2:Vector3DArray ) : void {
+        public static function transfc_3d( dst:Vector3DArray, src1:Matrix3D, src2:Vector3DArray ) : void {
             t.length = dst.length;
             
             ArrayMath.mulc_32f(dst.x, src2.x, src1.rawData[0]);

@@ -19,29 +19,29 @@ package com.strix.lab.as3pp.vector {
             t = new Float32Array(TEMP_SIZE);
         }
             
-        public static function add3D( dst:Vector3DArray, src1:Vector3DArray, src2:Vector3DArray ) : void {
+        public static function add_3d( dst:Vector3DArray, src1:Vector3DArray, src2:Vector3DArray ) : void {
             ArrayMath.add_32f(dst.x, src1.x, src2.x);
             ArrayMath.add_32f(dst.y, src1.y, src2.y);
             ArrayMath.add_32f(dst.z, src1.z, src2.z);
         }
         
-        public static function add2D( dst:Vector2DArray, src1:Vector2DArray, src2:Vector2DArray ) : void {
+        public static function add_2d( dst:PointArray, src1:PointArray, src2:PointArray ) : void {
             ArrayMath.add_32f(dst.x, src1.x, src2.x);
             ArrayMath.add_32f(dst.y, src1.y, src2.y);
         }
         
-        public static function subtract3D( dst:Vector3DArray, src1:Vector3DArray, src2:Vector3DArray ) : void {
+        public static function sub_3d( dst:Vector3DArray, src1:Vector3DArray, src2:Vector3DArray ) : void {
             ArrayMath.sub_32f(dst.x, src1.x, src2.x);
             ArrayMath.sub_32f(dst.y, src1.y, src2.y);
             ArrayMath.sub_32f(dst.z, src1.z, src2.z);
         }
         
-        public static function subtract2D( dst:Vector2DArray, src1:Vector2DArray, src2:Vector2DArray ) : void {
+        public static function sub_2d( dst:PointArray, src1:PointArray, src2:PointArray ) : void {
             ArrayMath.sub_32f(dst.x, src1.x, src2.x);
             ArrayMath.sub_32f(dst.y, src1.y, src2.y);
         }
 
-        public static function dotProduct3D( dst:Float32Array, src1:Vector3DArray, src2:Vector3DArray ) : void {
+        public static function dot_3d( dst:Float32Array, src1:Vector3DArray, src2:Vector3DArray ) : void {
             t.length = dst.length;
             
             //Candidates for MulAdd
@@ -57,7 +57,7 @@ package com.strix.lab.as3pp.vector {
             ArrayMath.add_32f(dst, dst, t);
         }
 
-        public static function dotProduct2D( dst:Float32Array, src1:Vector2DArray, src2:Vector2DArray ) : void {
+        public static function dot_2d( dst:Float32Array, src1:PointArray, src2:PointArray ) : void {
             t.length = dst.length;
             
             //Candidates for MulAdd
@@ -69,7 +69,7 @@ package com.strix.lab.as3pp.vector {
             ArrayMath.add_32f(dst, dst, t);
         }
         
-        public static function crossProduct3D( dst:Vector3DArray, src1:Vector3DArray, src2:Vector3DArray ) : void {
+        public static function cross_3d( dst:Vector3DArray, src1:Vector3DArray, src2:Vector3DArray ) : void {
             t.length = dst.length;
 
             ArrayMath.mul_32f(dst.x, src1.y, src2.z);
@@ -85,7 +85,7 @@ package com.strix.lab.as3pp.vector {
             ArrayMath.sub_32f(dst.z, dst.z, t);
         }
         
-        public static function crossProduct2D( dst:Float32Array, src1:Vector2DArray, src2:Vector2DArray ) : void {
+        public static function cross_2d( dst:Float32Array, src1:PointArray, src2:PointArray ) : void {
             t.length = dst.length;
             
             ArrayMath.mul_32f(dst, src1.x, src2.y);
@@ -93,7 +93,7 @@ package com.strix.lab.as3pp.vector {
             ArrayMath.sub_32f(dst, dst, t);
         }
         
-        public static function normalize3D( dst:Vector3DArray, src:Vector3DArray ) : void {
+        public static function norm_3d( dst:Vector3DArray, src:Vector3DArray ) : void {
             t.length = dst.length;
             
             ArrayUtils.copy_32f(t, src.x);
@@ -105,7 +105,7 @@ package com.strix.lab.as3pp.vector {
             ArrayMath.div_32f(dst.z, src.z, t);
         }
         
-        public static function normalize2D( dst:Vector2DArray, src:Vector2DArray ) : void {
+        public static function norm_2d( dst:PointArray, src:PointArray ) : void {
             t.length = dst.length;
             
             ArrayUtils.copy_32f(t, src.x);
@@ -115,35 +115,35 @@ package com.strix.lab.as3pp.vector {
         }
         
         
-        public static function project3D( dst:Vector3DArray, src:Vector3DArray ) : void {
+        public static function proj_3d( dst:Vector3DArray, src:Vector3DArray ) : void {
             ArrayMath.div_32f(dst.x, src.x, src.w);
             ArrayMath.div_32f(dst.y, src.y, src.w);
             ArrayMath.div_32f(dst.z, src.z, src.w);
         }
         
-        public static function scale3D( dst:Vector3DArray, src:Vector3DArray, factor:Float32Array ) : void {
+        public static function mul_3d( dst:Vector3DArray, src:Vector3DArray, factor:Float32Array ) : void {
             ArrayMath.mul_32f(dst.x, src.x, factor);
             ArrayMath.mul_32f(dst.y, src.y, factor);
             ArrayMath.mul_32f(dst.z, src.z, factor);
         }
         
-        public static function scaleBy3D( dst:Vector3DArray, src:Vector3DArray, factor:Number ) : void {
+        public static function mulc_3d( dst:Vector3DArray, src:Vector3DArray, factor:Number ) : void {
             ArrayMath.mulc_32f(dst.x, src.x, factor);
             ArrayMath.mulc_32f(dst.y, src.y, factor);
             ArrayMath.mulc_32f(dst.z, src.z, factor);
         }
         
-        public static function scale2D( dst:Vector2DArray, src:Vector2DArray, factor:Float32Array ) : void {
+        public static function mul_2d( dst:PointArray, src:PointArray, factor:Float32Array ) : void {
             ArrayMath.mul_32f(dst.x, src.x, factor);
             ArrayMath.mul_32f(dst.y, src.y, factor);
         }
         
-        public static function scaleBy2D( dst:Vector2DArray, src:Vector2DArray, factor:Number ) : void {
+        public static function mulc_32( dst:PointArray, src:PointArray, factor:Number ) : void {
             ArrayMath.mulc_32f(dst.x, src.x, factor);
             ArrayMath.mulc_32f(dst.y, src.y, factor);
         }
         
-        public static function length3D( dst:Float32Array, src:Vector3DArray ) : void {
+        public static function len_3d( dst:Float32Array, src:Vector3DArray ) : void {
             t.length = dst.length;
 
             //Candidates for MulAdd
@@ -161,7 +161,7 @@ package com.strix.lab.as3pp.vector {
             ArrayMath.sqrt_32f(dst, dst);
         }
         
-        public static function length2D( dst:Float32Array, src:Vector3DArray ) : void {
+        public static function len_2d( dst:Float32Array, src:Vector3DArray ) : void {
             t.length = dst.length;
             
             //Candidates for MulAdd
