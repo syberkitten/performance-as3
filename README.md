@@ -121,11 +121,16 @@ Adobe will not require you to purchase a license for the use of domainMemory and
 - Misc
    - Range support
    - Comparisons, masks, select, scatter/gather
+   - Deferred Mode Processing
 - Timers
    - **High-resolution timer** (Win32)
 - Algorithms
    - Compression: LZ4, PackBits, PFOR+PFOR-DELTA
    - Hashing: XXH, Murmur3, Wang
+
+<br>
+
+There are also plans to move from AMD Framewave to Intel IPP and Nvidia NPP for x86 in the future, when licenses can be afforded.
 
 <br><br>
 
