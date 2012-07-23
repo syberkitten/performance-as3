@@ -112,23 +112,20 @@ Adobe will not require you to purchase a license for the use of domainMemory and
    - Mac OS X (ANE, AMD Framewave)
    - iOS (ANE, Accelerate Framework)
    - Android (ANE, Renderscript)
-   - Flash Player (Adobe Alchemy, Pixel Bender)
+   - Flash Player (Adobe Alchemy 2, Pixel Bender)
 - Math 
-   - **Single-precision array math** (Implemented, Win32)
-   - **Integer array arithmetic** (Implemented, Win32)
-   - **Integer array bitwise functions** (Implemented, Win32)
-   - Vector and matrix math (Planned)
-   - Double-precision array math (Depending on community response)
+   - **Array math, floating-point** (Win32)
+   - Array math, integer
+   - **Vector math** (Win32)
+   - **Matrix math** (Win32)
 - Misc
-   - **Support functions** (Implemented, Win32)
-   - **Range support** (Implemented, Win32)
-   - Comparisons, masks, select (In development)
+   - Range support
+   - Comparisons, masks, select, scatter/gather
 - Timers
-   - **High-resolution timer** (Implemented, Win32)
+   - **High-resolution timer** (Win32)
 - Algorithms
-   - Compression: LZ4 (Planned), PackBits (Planned), PFOR+PFOR-DELTA (Planned)
-   - **Hashing:** **XXH** (Implemented, Win32), **Wang** (Implemented, Win32) 
-- Data structures and containers (Depending on feasibility)
+   - Compression: LZ4, PackBits, PFOR+PFOR-DELTA
+   - Hashing: XXH, Murmur3, Wang
 
 <br><br>
 
@@ -165,33 +162,13 @@ birds.updatePositions(movementX, movementY);
 <br><br>
 
 ## Documentation
-General
- - [Installing, upgrading & troubleshooting](https://github.com/martinkallman/performance-as3/wiki/Installing,-upgrading-and-managing-faulty-state)
- - [Data types](https://github.com/martinkallman/performance-as3/wiki/Data-types)
- - [Function naming](https://github.com/martinkallman/performance-as3/wiki/Function-naming)
- - [Ranges](https://github.com/martinkallman/performance-as3/wiki/Ranges)
-
-Reference
- - Math
-    - [Single-precision array math](https://github.com/martinkallman/performance-as3/wiki/Single-precision-array-math)
-    - [Integer array arithmetic](https://github.com/martinkallman/performance-as3/wiki/Integer-array-arithmetic)
-    - [Integer array bitwise functions](https://github.com/martinkallman/performance-as3/wiki/Integer-array-bitwise-functions)
- - Misc
-    - [Support functions](https://github.com/martinkallman/performance-as3/wiki/Support-functions)
-    - [Comparison and select functions](https://github.com/martinkallman/performance-as3/wiki/Compare-and-select-functions)
-    - [Masks](https://github.com/martinkallman/performance-as3/wiki/Masks)
- - Timer
-    - [PerformanceTimer](https://github.com/martinkallman/performance-as3/wiki/PerformanceTimer)
- - Algorithms
-    - [Hashing: XXH, Wang](https://github.com/martinkallman/performance-as3/wiki/Algorithms)
+Please see [the wiki pages](https://github.com/martinkallman/performance-as3/wiki/_pages).
 
 <br><br>
 
 
 ## Developer's notes
- - This library requires a SSE2-capable machine
- - Currently all transcendental functions are scalar. Will investigate moving to SSE2 variants
- - To compile with GCC/MinGW, use the following flags in order to benefit from vectorization: `-msse2 -ftree-vectorize`
+ - Compiler (Win32): Visual Studio 2010
 
 <br><br>
 
