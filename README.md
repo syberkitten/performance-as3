@@ -2,6 +2,7 @@ ActionScript 3 Performance Primitives
 =====================================
 
 ## News
+ - 2012-07-23: Development snapshot of ANE (x86) version. Documentation now out of date; some functions & classes missing; no unit tests yet
  - 2012-07-20: Drafting support for Flash Player through Adobe Alchemy 2
  - 2012-07-20: Baseline functionality almost complete: floating-point array math, vector math, matrix math
  - 2012-07-17: Full rewrite with vectorization (SSE2) and multithreading support underway
