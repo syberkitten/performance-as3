@@ -145,9 +145,9 @@ class MadBirds {
 
    public function updatePositions( movementX:Float32Array, movementY:Float32Array ) : void {
       //x = movementX + x
-      vfadd(x, movementX, x);
+      ArrayMath.addi_32f(x, movementX);
       //y = movementY + y
-      vfadd(y, movementY, y);
+      ArrayMath.addi_32f(y, movementY);
    }
 }
 
